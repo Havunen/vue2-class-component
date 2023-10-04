@@ -1,11 +1,10 @@
-module.exports = {
+export default {
   mode: 'development',
   entry: [
     './test/test.ts',
     './test/test-babel.js'
   ],
   output: {
-    path: __dirname,
     filename: 'test.build.js'
   },
   module: {
@@ -22,4 +21,4 @@ module.exports = {
       }
     ]
   }
-}
+};
