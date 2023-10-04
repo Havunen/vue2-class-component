@@ -1,11 +1,17 @@
-const fs = require('fs')
-const path = require('path')
-const zlib = require('zlib')
-const uglify = require('uglify-es')
-const rollup = require('rollup')
-const replace = require('rollup-plugin-replace')
-const babel = require('rollup-plugin-babel')
-const version = process.env.VERSION || require('../package.json').version
+import fs from 'fs';
+import path from 'path';
+import zlib from 'zlib';
+import uglify from 'uglify-js';
+import {rollup} from 'rollup';
+import replace from '@rollup/plugin-replace';
+import babel from '@rollup/plugin-babel';
+import pkgJson from '../package.json' assert { type: 'json' };
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const version = process.env.VERSION || pkgJson.version
 const banner =
 `/**
   * vue-class-component v${version}
@@ -26,19 +32,8 @@ const babelConfigForModern = {
       {
         modules: false,
         targets: {
-          esmodules: true
+          browsers: ["last 2 chrome version", "last 2 firefox version", "last 2 safari version"],
         }
-      }
-    ]
-  ]
-}
-
-const babelConfigForLegacy = {
-  presets: [
-    [
-      '@babel/env',
-      {
-        modules: false
       }
     ]
   ]
@@ -46,30 +41,16 @@ const babelConfigForLegacy = {
 
 build([
   {
-    file: resolve('dist/vue-class-component.js'),
-    format: 'umd',
-    env: 'development'
-  },
-  {
-    file: resolve('dist/vue-class-component.min.js'),
-    format: 'umd',
-    env: 'production'
-  },
-  {
-    file: resolve('dist/vue-class-component.common.js'),
-    format: 'cjs'
-  },
-  {
-    file: resolve('dist/vue-class-component.esm.js'),
+    file: resolve('dist/vue-class-component.esm.mjs'),
     format: 'esm'
   },
   {
-    file: resolve('dist/vue-class-component.esm.browser.js'),
+    file: resolve('dist/vue-class-component.esm.dev.mjs'),
     format: 'esm',
     env: 'development'
   },
   {
-    file: resolve('dist/vue-class-component.esm.browser.min.js'),
+    file: resolve('dist/vue-class-component.esm.prod.min.mjs'),
     format: 'esm',
     env: 'production'
   }
@@ -83,11 +64,7 @@ function genConfig (opts) {
       input: resolve('lib/index.js'),
       external: ['vue'],
       plugins: [
-        babel(
-          opts.format === 'esm' && typeof opts.env === 'string'
-            ? babelConfigForModern
-            : babelConfigForLegacy
-        )
+        babel(babelConfigForModern)
       ]
     },
     output: {
@@ -131,7 +108,7 @@ function build (builds) {
 
 function buildEntry ({ input, output }) {
   const isProd = /min\.js$/.test(output.file)
-  return rollup.rollup(input)
+  return rollup(input)
     .then(bundle => bundle.generate(output))
     .then(result => {
       const { code } = result.output[0]

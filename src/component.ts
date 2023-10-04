@@ -70,7 +70,9 @@ export function componentFactory (
   // decorate options
   const decorators = (Component as DecoratedClass).__decorators__
   if (decorators) {
-    decorators.forEach(fn => fn(options))
+    for (const fn of decorators) {
+      fn(options);
+    }
     delete (Component as DecoratedClass).__decorators__
   }
 
