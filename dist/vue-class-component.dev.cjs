@@ -1,5 +1,5 @@
 /**
-  * vue-class-component v7.3.2
+  * vue-class-component v7.3.3
   * (c) 2015-present Evan You
   * @license MIT
   */
@@ -240,6 +240,7 @@ Component.registerHooks = function registerHooks(keys) {
   $internalHooks.push(...keys);
 };
 
+exports.Component = Component;
 exports.createDecorator = createDecorator;
 exports.default = Component;
 exports.mixins = mixins;

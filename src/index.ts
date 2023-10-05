@@ -19,4 +19,8 @@ Component.registerHooks = function registerHooks (keys: string[]): void {
   $internalHooks.push(...keys)
 }
 
+export {
+  Component
+}
+
 export default Component

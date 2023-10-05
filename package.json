@@ -1,6 +1,6 @@
 {
   "name": "@havunen/vue2-class-component",
-  "version": "7.3.2",
+  "version": "7.3.3",
   "type": "module",
   "description": "ES201X/TypeScript class decorator for Vue components",
   "exports": "./dist/vue-class-component.esm.mjs",
@@ -68,8 +68,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^5.0.5",
     "rollup": "^3.29.4",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-replace": "^5.0.3",
     "testdouble": "^3.19.0",
     "ts-loader": "^9.4.4",
     "typescript": "^5.2.2",
