@@ -41,6 +41,16 @@ const babelConfigForModern = {
 
 build([
   {
+    file: resolve('dist/vue-class-component.dev.cjs'),
+    format: 'cjs',
+    env: 'development'
+  },
+  {
+    file: resolve('dist/vue-class-component.prod.cjs'),
+    format: 'cjs',
+    env: 'production'
+  },
+  {
     file: resolve('dist/vue-class-component.esm.mjs'),
     format: 'esm'
   },

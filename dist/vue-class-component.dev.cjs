@@ -3,7 +3,11 @@
   * (c) 2015-present Evan You
   * @license MIT
   */
-import Vue from 'vue';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var Vue = require('vue');
 
 // The rational behind the verbose Reflect-feature check below is the fact that there are polyfills
 // which add an implementation for Reflect.defineMetadata but not for Reflect.getOwnMetadataKeys.
@@ -99,7 +103,7 @@ function collectDataFromConstructor(vm, Component) {
       plainData[key] = data[key];
     }
   });
-  if (process.env.NODE_ENV !== 'production') {
+  {
     if (!(Component.prototype instanceof Vue) && Object.keys(plainData).length > 0) {
       warn('Component class must inherit Vue or its descendant class ' + 'when class property is used.');
     }
@@ -217,7 +221,7 @@ function forwardStaticMembers(Extended, Original, Super) {
       }
     }
     // Warn if the users manually declare reserved properties
-    if (process.env.NODE_ENV !== 'production' && reservedPropertyNames.indexOf(key) >= 0) {
+    if (reservedPropertyNames.indexOf(key) >= 0) {
       warn(`Static property name '${key}' declared on class '${Original.name}' ` + 'conflicts with reserved property name of Vue internal. ' + 'It may cause unexpected behavior of the component. Consider renaming the property.');
     }
     Object.defineProperty(Extended, key, descriptor);
@@ -236,4 +240,6 @@ Component.registerHooks = function registerHooks(keys) {
   $internalHooks.push(...keys);
 };
 
-export { createDecorator, Component as default, mixins };
+exports.createDecorator = createDecorator;
+exports.default = Component;
+exports.mixins = mixins;
