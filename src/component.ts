@@ -1,5 +1,4 @@
 import Vue, {ComponentOptions} from 'vue'
-import { copyReflectionMetadata } from './reflect.js'
 import { VueClass, DecoratedClass } from './declarations.js'
 import { collectDataFromConstructor } from './data.js'
 import { warn } from './util.js'
@@ -83,7 +82,6 @@ export function componentFactory (
   const Extended = Super.extend(options)
 
   forwardStaticMembers(Extended, Component)
-  copyReflectionMetadata(Extended, Component)
 
   return Extended
 }

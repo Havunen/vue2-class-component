@@ -181,7 +181,7 @@ describe('vue-class-component with Babel', () => {
     expect(vm.valueB).to.equal(456)
   })
 
-  it('copies reflection metadata', function () {
+  it.skip('copies reflection metadata', function () {
     @Component
     @Reflect.metadata('worksConstructor', true)
     class Test extends Vue {

@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 7.4.1
+
+- Support for copying reflection metadata removed
+
 ### 7.4.0
 
 - Optimized Component construction

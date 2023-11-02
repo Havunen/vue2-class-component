@@ -1,6 +1,6 @@
 {
   "name": "@havunen/vue2-class-component",
-  "version": "7.4.0",
+  "version": "7.4.1",
   "type": "module",
   "description": "ES201X/TypeScript class decorator for Vue components",
   "exports": "./dist/vue-class-component.esm.mjs",
