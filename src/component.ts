@@ -1,8 +1,8 @@
-import Vue, { ComponentOptions } from 'vue'
-import { copyReflectionMetadata, reflectionIsSupported } from './reflect'
-import { VueClass, DecoratedClass } from './declarations'
-import { collectDataFromConstructor } from './data'
-import { hasProto, isPrimitive, warn } from './util'
+import Vue, {ComponentOptions} from 'vue'
+import { copyReflectionMetadata } from './reflect.js'
+import { VueClass, DecoratedClass } from './declarations.js'
+import { collectDataFromConstructor } from './data.js'
+import { hasProto, isPrimitive, warn } from './util.js'
 
 export const $internalHooks = [
   'data',
@@ -78,16 +78,14 @@ export function componentFactory (
 
   // find super
   const superProto = Object.getPrototypeOf(Component.prototype)
-  const Super = superProto instanceof Vue
-    ? superProto.constructor as VueClass<Vue>
-    : Vue
+
+  // @ts-ignore
+  const Super: any = superProto instanceof Vue ? superProto.constructor as VueClass<Vue> : Vue
+
   const Extended = Super.extend(options)
 
   forwardStaticMembers(Extended, Component, Super)
-
-  if (reflectionIsSupported()) {
-    copyReflectionMetadata(Extended, Component)
-  }
+  copyReflectionMetadata(Extended, Component)
 
   return Extended
 }
@@ -170,7 +168,7 @@ function forwardStaticMembers (
       reservedPropertyNames.indexOf(key) >= 0
     ) {
       warn(
-        `Static property name '${key}' declared on class '${Original.name}' ` +
+        `Static property name '${key}' declared on class '${(Original as any).name}' ` +
         'conflicts with reserved property name of Vue internal. ' +
         'It may cause unexpected behavior of the component. Consider renaming the property.'
       )

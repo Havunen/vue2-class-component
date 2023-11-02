@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   title: 'Vue Class Component',
   description: 'ECMAScript / TypeScript decorator for class-style Vue components',
 

@@ -1,5 +1,12 @@
 # [DEPRECATED] Vue Class Component
 
+## Changelog
+
+### 7.3.4
+
+- Optimized Component construction
+- Reflect feature check removed, It is supported by all supported browsers
+
 
 ## ⚠️ Notice
 

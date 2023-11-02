@@ -1,17 +1,10 @@
 /**
-  * vue-class-component v7.3.3
+  * vue-class-component v7.3.4
   * (c) 2015-present Evan You
   * @license MIT
   */
 import Vue from 'vue';
 
-// The rational behind the verbose Reflect-feature check below is the fact that there are polyfills
-// which add an implementation for Reflect.defineMetadata but not for Reflect.getOwnMetadataKeys.
-// Without this check consumers will encounter hard to track down runtime errors.
-function reflectionIsSupported() {
-  // @ts-ignore
-  return typeof Reflect !== 'undefined' && Reflect.defineMetadata && Reflect.getOwnMetadataKeys;
-}
 function copyReflectionMetadata(to, from) {
   forwardMetadata(to, from);
   Object.getOwnPropertyNames(from.prototype).forEach(key => {
@@ -50,6 +43,7 @@ function createDecorator(factory) {
   };
 }
 function mixins(...Ctors) {
+  // @ts-ignore
   return Vue.extend({
     mixins: Ctors
   });
@@ -100,6 +94,7 @@ function collectDataFromConstructor(vm, Component) {
     }
   });
   {
+    // @ts-ignore
     if (!(Component.prototype instanceof Vue) && Object.keys(plainData).length > 0) {
       warn('Component class must inherit Vue or its descendant class ' + 'when class property is used.');
     }
@@ -161,12 +156,11 @@ function componentFactory(Component, options = {}) {
   }
   // find super
   const superProto = Object.getPrototypeOf(Component.prototype);
+  // @ts-ignore
   const Super = superProto instanceof Vue ? superProto.constructor : Vue;
   const Extended = Super.extend(options);
   forwardStaticMembers(Extended, Component, Super);
-  if (reflectionIsSupported()) {
-    copyReflectionMetadata(Extended, Component);
-  }
+  copyReflectionMetadata(Extended, Component);
   return Extended;
 }
 const reservedPropertyNames = [

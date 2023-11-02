@@ -1,8 +1,9 @@
+// @ts-ignore
 import Vue, { ComponentOptions } from 'vue'
-import { VueClass } from './declarations'
-import { componentFactory, $internalHooks } from './component'
+import { VueClass } from './declarations.js'
+import { componentFactory, $internalHooks } from './component.js'
 
-export { createDecorator, VueDecorator, mixins } from './util'
+export { createDecorator, VueDecorator, mixins } from './util.js'
 
 function Component <V extends Vue>(options: ComponentOptions<V> & ThisType<V>): <VC extends VueClass<V>>(target: VC) => VC
 function Component <VC extends VueClass<Vue>>(target: VC): VC

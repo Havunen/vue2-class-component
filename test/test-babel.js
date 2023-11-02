@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import Component, { createDecorator, mixins } from '../lib'
+import Component, { createDecorator, mixins } from '../lib/index.js'
 import { expect } from 'chai'
 import * as td from 'testdouble'
 import Vue from 'vue'

@@ -6,8 +6,9 @@
       "dom",
       "ES2020"
     ],
-    "module": "ES2020",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true,
     "outDir": "lib",
     "declaration": true,
     "strict": true,
