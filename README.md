@@ -6,7 +6,7 @@
 
 - Optimized Component construction
 - Reflect feature check removed, It is supported by all supported browsers
-
+- IE support removed
 
 ## ⚠️ Notice
 
