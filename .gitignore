@@ -5,3 +5,4 @@ docs/.vuepress/dist
 test/test.build.js
 lib
 .idea
+dist
