@@ -17,7 +17,9 @@ function Component (options: ComponentOptions<Vue> | VueClass<Vue>): any {
 }
 
 Component.registerHooks = function registerHooks (keys: string[]): void {
-  $internalHooks.push(...keys)
+  for (const k of keys) {
+    $internalHooks.add(k)
+  }
 }
 
 export {

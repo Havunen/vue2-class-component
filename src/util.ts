@@ -3,9 +3,6 @@ import { VueClass, DecoratedClass } from './declarations.js'
 
 export const noop = () => {}
 
-const fakeArray = { __proto__: [] }
-export const hasProto = fakeArray instanceof Array
-
 export interface VueDecorator {
   // Class decorator
   (Ctor: typeof Vue): void
