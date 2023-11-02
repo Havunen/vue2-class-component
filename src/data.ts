@@ -16,13 +16,13 @@ export function collectDataFromConstructor (vm: Vue, Component: VueClass<Vue>) {
         }
       }
     }
-    keys.forEach(key => {
+    for (const key of keys) {
       Object.defineProperty(this, key, {
         get: () => vm[key],
         set: value => { vm[key] = value },
         configurable: true
       })
-    })
+    }
   }
 
   // should be acquired class property values
@@ -33,11 +33,11 @@ export function collectDataFromConstructor (vm: Vue, Component: VueClass<Vue>) {
 
   // create plain data object
   const plainData = {}
-  Object.keys(data).forEach(key => {
+  for (const key of Object.keys(data)) {
     if (data[key] !== undefined) {
       plainData[key] = data[key]
     }
-  })
+  }
 
   if (process.env.NODE_ENV !== 'production') {
     // @ts-ignore

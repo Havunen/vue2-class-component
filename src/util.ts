@@ -54,12 +54,7 @@ export function mixins<T>(...Ctors: VueClass<Vue>[]): VueClass<T>
 export function mixins<T extends VueClass<Vue>[]>(...Ctors: T): MixedVueClass<T>
 export function mixins (...Ctors: VueClass<Vue>[]): VueClass<Vue> {
   // @ts-ignore
-  return Vue.extend({ mixins: Ctors })
-}
-
-export function isPrimitive (value: any): boolean {
-  const type = typeof value
-  return value == null || (type !== 'object' && type !== 'function')
+  return Vue.extend({mixins: Ctors})
 }
 
 export function warn (message: string): void {

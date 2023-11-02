@@ -8,13 +8,13 @@ export function copyReflectionMetadata (
 ) {
   forwardMetadata(to, from)
 
-  Object.getOwnPropertyNames(from.prototype).forEach(key => {
+  for (const key of Object.getOwnPropertyNames(from.prototype)) {
     forwardMetadata(to.prototype, from.prototype, key)
-  })
+  }
 
-  Object.getOwnPropertyNames(from).forEach(key => {
+  for (const key of Object.getOwnPropertyNames(from)) {
     forwardMetadata(to, from, key)
-  })
+  }
 }
 
 function forwardMetadata (to: object, from: object, propertyKey?: string): void {
@@ -22,7 +22,7 @@ function forwardMetadata (to: object, from: object, propertyKey?: string): void 
     ? Reflect.getOwnMetadataKeys(from, propertyKey)
     : Reflect.getOwnMetadataKeys(from)
 
-  metaKeys.forEach(metaKey => {
+  for (const metaKey of metaKeys) {
     const metadata = propertyKey
       ? Reflect.getOwnMetadata(metaKey, from, propertyKey)
       : Reflect.getOwnMetadata(metaKey, from)
@@ -32,5 +32,5 @@ function forwardMetadata (to: object, from: object, propertyKey?: string): void 
     } else {
       Reflect.defineMetadata(metaKey, metadata, to)
     }
-  })
+  }
 }
